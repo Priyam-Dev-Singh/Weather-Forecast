@@ -26,7 +26,7 @@ function Time(){
     if(hr<10) hr=`0${hr}`;
 }
 Time();
-setInterval(Time(), 1000);
+setInterval(Time(), 500);
 
 let citites=["Delhi","Mumbai","Chennai","Kolkata","Bangalore","Hyderabad","Pune","Ahmedabad","Jaipur","Lucknow","Kanpur","Nagpur","Indore","Thane","Bhopal","Visakhapatnam","Patna","Vadodara","Ghaziabad","Ludhiana","Agra","Nashik"];
 
