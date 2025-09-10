@@ -1,0 +1,124 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+html,body{
+    height: 100%;
+    width: 100%;
+    
+}
+#main{
+    height: 100%;
+    width: 100%;
+    ;
+   
+}
+#bg{
+    height: 100%;
+    width: 100%;
+    top: 0;
+    left: 0;
+    position: fixed;
+   background-color: rgb(184, 228, 228);
+    z-index: -1;
+}
+#bg img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    
+}
+#header{
+    height: 20%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+#content{
+   height: 80%;
+    width: 100%;
+   display: flex;
+   align-items: center;
+   justify-content: space-betweem;
+}
+#date{
+    height: 100px;
+    width: 200px;
+    margin: 40px;
+    padding: 10px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.56);
+    font-weight: lighter;
+    
+}
+.dt{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    font-size: x-large;
+    font-family: 'Oswald', 'sans-serif';
+   
+}
+#searchcity{
+    height: 50px;
+    width: 500px;
+    margin-left: 100px;
+    padding: 10px;
+    border-radius: 25px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.562);
+    backdrop-filter: blur(8px);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+#globe img{
+    object-fit: cover;
+    height: 30px;
+}
+.sideicon{
+    height: 100%;
+    width: 10%;
+    display: flex;
+    align-items: center;
+  
+}
+#search{
+    height: 100%;
+    width: 79%;
+}
+#search input{
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+#time{
+    height: 50px;
+    width: 150px;
+    margin-left: 120px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.562);
+     display:flex;
+    justify-content: center;
+    align-items: center;
+}
+.misc{
+    height: 170px;
+    width: 120px;
+    margin-left: 65px;
+    margin-top: 30px;
+    margin-bottom: 60px;
+    border-radius: 10px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.56);
+}
+#weather{
+    height:90%;
+    width: 65%;
+    margin-left: 130px;
+    border-radius: 30px;
+    backdrop-filter: blur(8px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.56);
+}
