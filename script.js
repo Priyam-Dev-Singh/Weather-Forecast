@@ -23,11 +23,11 @@ date.innerHTML = `<p class="dt">${new Date().toLocaleDateString()}</p><p class="
 function Time(){
     let minutes= new Date().getMinutes();
     let hr = new Date().getHours();
-    time.innerHTML = `<p class="dt">${hr} : ${minutes} </p>`
     if(minutes==0) minutes="00";
     if(minutes<10) minutes=`0${minutes}`;
-    if(hr==0) hr=`0`;
+    if(hr==0) hr=`00`;
     if(hr<10) hr=`0${hr}`;
+    time.innerHTML = `<p class="dt">${hr} : ${minutes} </p>`
 }
 Time();
 setInterval(Time,1000);
