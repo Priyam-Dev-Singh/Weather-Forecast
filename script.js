@@ -4,8 +4,70 @@ let time = document.getElementById("time");
 let input = document.querySelector("#search input");
 let search = document.querySelector("#searchicon i");
 let weather = document.getElementById("weather");
-
 let day = new Date().getDay();
+let temprn = document.getElementById("temprn");
+let tempmx = document.getElementById("tempmx");
+let tempmn = document.getElementById("tempmn");
+let feelslike = document.getElementById("feelslike");
+let humid = document.getElementById("humid");
+let wind = document.getElementById("wind");
+let wtext = document.getElementById("wtext");
+let city = document.getElementById("city");
+
+navigator.geolocation.getCurrentPosition(success,error);
+function success(position){
+    let lat = position.coords.latitude;
+    let lon = position.coords.longitude;
+
+    let apikey = "3975abc645db6a3c1b100a44564bcb7b";
+    let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
+    console.log("Latitude: ",lat,"Longitude: ",lon);
+
+    fetch(url)
+    .then(Response=>Response.json())
+    .then(data=>{console.log(data);
+        weatherupdate(data);
+        if(data.weather[0].main.toLowerCase()===`haze`){
+        bg.innerHTML=`<img src="https://i.pinimg.com/1200x/99/3a/e7/993ae760a2944d557193906361bd10c0.jpg" alt="">`;
+    }
+    })
+
+    fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
+    .then(res=>res.json())
+    .then(data=>{console.log(data.address);
+        city.innerHTML=`${data.address.city_district}<br>${data.address.city}`;
+    })
+   
+    .catch(err=>console.log("error fetching weather: ",err))
+}
+function error (err){
+    console.log(`Error: `,err.message);
+}
+
+search.addEventListener("click", function(){
+    let cityName= input.value.toLowerCase();
+  
+} )
+
+input.addEventListener("keydown",function(event){
+    if(event.key==="Enter"){
+        let cityName= input.value.toLowerCase();
+       
+    }
+})
+
+function weatherupdate(data){
+    temprn.innerHTML=`${Math.round(data.main.temp)}&deg;C`;
+    tempmx.innerHTML=`MAX.<br>${Math.ceil(data.main.temp_max)}&deg;C`;
+    tempmn.innerHTML=`MIN.<br>${Math.floor(data.main.temp_min)}&deg;C`;
+    feelslike.innerHTML=`Feels like ${Math.round(data.main.feels_like)}&deg;C`;
+    humid.innerHTML=`💧 ${data.main.humidity}%`;
+    wind.innerHTML=`💨 ${Math.round(data.wind.speed)}m/s`;
+    let desc = data.weather[0].main;
+   wtext.innerHTML=desc.charAt(0).toUpperCase()+desc.slice(1);
+   
+
+}
 
 function daysletter(){
 
@@ -24,29 +86,16 @@ function Time(){
     let minutes= new Date().getMinutes();
     let hr = new Date().getHours();
     if(minutes==0) minutes="00";
-    if(minutes<10) minutes=`0${minutes}`;
+    if(minutes>0&&minutes<10) minutes=`0${minutes}`;
     if(hr==0) hr=`00`;
-    if(hr<10) hr=`0${hr}`;
+    if(hr>0&&hr<10) hr=`0${hr}`;
     time.innerHTML = `<p class="dt">${hr} : ${minutes} </p>`
 }
 Time();
 setInterval(Time,1000);
 
-let cities=["delhi","mumbai","chennai","kolkata","bangalore","hyderabad","pune","ahmedabad","jaipur","lucknow","kanpur","nagpur","indore","thane","bhopal","visakhapatnam","patna","vadodara","ghaziabad","ludhiana","agra","nashik"];
 
-search.addEventListener("click", function(){
-    let cityName= input.value.toLowerCase();
-   if(cities.includes(cityName)) 
-    console.log(`city is found`);
-    else console.log(`city is not found`);
-} )
 
-input.addEventListener("keydown",function(event){
-    if(event.key==="Enter"){
-        let cityName= input.value.toLowerCase();
-        if(cities.includes(cityName)) 
-        console.log(`city is found`);
-        else console.log(`city is not found`);
-    }
-})
 
+
+//<img src="https://i.pinimg.com/736x/b4/0e/fd/b40efdcf5f50db7c65b4927d084822bb.jpg" alt="">
