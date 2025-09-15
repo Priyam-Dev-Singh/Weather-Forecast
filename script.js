@@ -27,15 +27,15 @@ function success(position){
     .then(Response=>Response.json())
     .then(data=>{console.log(data);
         weatherupdate(data);
-        if(data.weather[0].main.toLowerCase()===`haze`){
-        bg.innerHTML=`<img src="https://i.pinimg.com/1200x/99/3a/e7/993ae760a2944d557193906361bd10c0.jpg" alt="">`;
-    }
+        animations(data);
+      
+        
     })
 
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
     .then(res=>res.json())
     .then(data=>{console.log(data.address);
-        city.innerHTML=`${data.address.city_district}<br>${data.address.city}`;
+        city.innerHTML=`${data.address.city}<br>${data.address.country}`;
     })
    
     .catch(err=>console.log("error fetching weather: ",err))
@@ -65,7 +65,29 @@ function weatherupdate(data){
     wind.innerHTML=`💨 ${Math.round(data.wind.speed)}m/s`;
     let desc = data.weather[0].main;
    wtext.innerHTML=desc.charAt(0).toUpperCase()+desc.slice(1);
-   
+
+}
+
+function animations(data){
+    let wthr = data.weather[0].main.toLowerCase();
+    if(wthr===`clouds`){
+        
+    }
+    if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
+        
+    }
+    if(wthr===`rain`|| wthr===`drizzle`){
+        
+    }
+    if(wthr===`clear`){
+        
+    }
+    if(wthr===`snow`){
+
+    }
+    if(wthr===`tornado`||wthr===`squal`){
+        
+    }
 
 }
 

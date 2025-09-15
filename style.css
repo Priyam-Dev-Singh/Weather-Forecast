@@ -151,7 +151,7 @@ html,body{
     transition: all 0.2s ease;
 }
 #weather{
-    height:90%;
+    height:92%;
     width: 58%;
     margin-left: 130px;
     border-radius: 30px;
@@ -177,7 +177,7 @@ html,body{
    
 }
 #wicon{
-    height: 77%;
+    height: 80%;
     width: 100%;
     background-color: aqua;
 }
