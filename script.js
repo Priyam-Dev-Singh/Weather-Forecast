@@ -94,25 +94,61 @@ function changetable(data){
         let ticons = document.querySelectorAll("#wthrdays table .ticons img");
         let thumid = document.querySelectorAll("#wthrdays table .thumid");
         let twspeed = document.querySelectorAll("#wthrdays table .twspeed");
+        let ttmin = document.querySelectorAll("#wthrdays table .ttmin");
+        let ttmax = document.querySelectorAll("#wthrdays table .ttmax");
+        let tempmx = document.getElementById("tempmx");
+        let tempmn = document.getElementById("tempmn");
+
+            let min= Infinity;
+            let max = -Infinity;
+       
+         function maxmin (max,min,j,i){
+            let p=i;
+            for(let i=j ; i <= (j+7) ; i++){
+            let tpmn= data.list[i].main.temp_min;
+            let tpmx= data.list[i].main.temp_max; 
+
+             if(i<=7){ console.log(i);headmaxmin(max,min)}
+                if(tpmn < min) min = tpmn;
+                if(tpmx > max) max = tpmx;
+                update(max,min,p);
+        }
+     }
+        
+        function update(max,min,p){
+        ttmin[p].innerHTML = `${Math.round(min)}&deg;C`;
+        ttmax[p].innerHTML = `${Math.round(max)}&deg;C`;
+    }
+
+    function headmaxmin(max,min) {
+        tempmn.innerHTML = `${Math.round(min)}&deg;C`;
+        tempmx.innerHTML = `${Math.round(max)}&deg;C`;
+    }
+
+    
       
         for( let i=0 ; i < 4 ; i++){
-            let date = new Date(data.list[(i+1)*8].dt*1000);
+            let j=(i+1)*8;
+            let date = new Date(data.list[j].dt*1000);
             let options= {weekday:`short`,month:`short`,day:`numeric`};
             date=date.toLocaleDateString(`en-US`,options);
             daycells[i].textContent = date;
 
-            let desc = data.list[(i+1)*8].weather[0].main;
+            let desc = data.list[j].weather[0].main;
             wthrcells[i].textContent = desc;
     
-            let iconcode = data.list[(i+1)*8].weather[0].icon;
+            let iconcode = data.list[j].weather[0].icon;
             let iconurl = `https://openweathermap.org/img/wn/${iconcode}@2x.png`;
             ticons[i].src = iconurl;
 
-            thumid[i].textContent = data.list[(i+1)*8].main.humidity+`%`;
+            thumid[i].textContent = data.list[j].main.humidity+`%`;
 
-            twspeed[i].textContent = Math.round(data.list[(i+1)*8].wind.speed)+`m/s`;
-            
+            twspeed[i].textContent = Math.round(data.list[j].wind.speed)+`m/s`;
 
+            maxmin(max,min,j,i);
+           
+            maxmin(max,min,0,0);
+         
            
         }
 
