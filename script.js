@@ -14,6 +14,10 @@ let wind = document.getElementById("wind");
 let wtext = document.getElementById("wtext");
 let city = document.getElementById("city");
 
+
+
+
+
 navigator.geolocation.getCurrentPosition(success,error);
 function success(position){
     let lat = position.coords.latitude;
@@ -21,21 +25,36 @@ function success(position){
 
     let apikey = "3975abc645db6a3c1b100a44564bcb7b";
     let url = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
+    let url2 = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apikey}&units=metric`;
     console.log("Latitude: ",lat,"Longitude: ",lon);
 
+     function fetchwthr(){
     fetch(url)
     .then(Response=>Response.json())
-    .then(data=>{console.log(data);
+    .then(data=>{
         weatherupdate(data);
-        animations(data);
-      
-        
+       //animations(data);
     })
+}    
+fetchwthr();
+setInterval(fetchwthr,600*1000);
+
+function fetchfrcst(){
+    fetch(url2)
+    .then(Response=>Response.json())
+    .then(data=>{
+        console.log(data);
+        changetable(data);
+    })
+    .catch(err=>console.log(`error fetching forecast: `,err))
+}
+
+    fetchfrcst();
 
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
     .then(res=>res.json())
     .then(data=>{console.log(data.address);
-        city.innerHTML=`${data.address.city}<br>${data.address.country}`;
+        city.innerHTML=`${data.address.neighbourhood}<br>${data.address.city}, ${data.address.country_code.toUpperCase()}`;
     })
    
     .catch(err=>console.log("error fetching weather: ",err))
@@ -61,14 +80,46 @@ function weatherupdate(data){
     tempmx.innerHTML=`MAX.<br>${Math.ceil(data.main.temp_max)}&deg;C`;
     tempmn.innerHTML=`MIN.<br>${Math.floor(data.main.temp_min)}&deg;C`;
     feelslike.innerHTML=`Feels like ${Math.round(data.main.feels_like)}&deg;C`;
-    humid.innerHTML=`💧 ${data.main.humidity}%`;
-    wind.innerHTML=`💨 ${Math.round(data.wind.speed)}m/s`;
+    humid.innerHTML=`<img class="hicon" src="https://cdn-icons-png.flaticon.com/512/9342/9342300.png"> ${data.main.humidity}%`;
+    wind.innerHTML=`<img class="hicon" src="https://cdn4.iconfinder.com/data/icons/weather-182/24/weather_forcast_wind_windy-512.png"> ${Math.round(data.wind.speed)}m/s`;
     let desc = data.weather[0].main;
    wtext.innerHTML=desc.charAt(0).toUpperCase()+desc.slice(1);
 
 }
 
-function animations(data){
+function changetable(data){
+        console.log(data);
+        let daycells = document.querySelectorAll("#wthrdays table .date");
+        let wthrcells = document.querySelectorAll("#wthrdays table .wthrdesc");
+        let ticons = document.querySelectorAll("#wthrdays table .ticons img");
+        let thumid = document.querySelectorAll("#wthrdays table .thumid");
+        let twspeed = document.querySelectorAll("#wthrdays table .twspeed");
+      
+        for( let i=0 ; i < 4 ; i++){
+            let date = new Date(data.list[(i+1)*8].dt*1000);
+            let options= {weekday:`short`,month:`short`,day:`numeric`};
+            date=date.toLocaleDateString(`en-US`,options);
+            daycells[i].textContent = date;
+
+            let desc = data.list[(i+1)*8].weather[0].main;
+            wthrcells[i].textContent = desc;
+    
+            let iconcode = data.list[(i+1)*8].weather[0].icon;
+            let iconurl = `https://openweathermap.org/img/wn/${iconcode}@2x.png`;
+            ticons[i].src = iconurl;
+
+            thumid[i].textContent = data.list[(i+1)*8].main.humidity+`%`;
+
+            twspeed[i].textContent = Math.round(data.list[(i+1)*8].wind.speed)+`m/s`;
+            
+
+           
+        }
+
+
+}
+
+/*function animations(data){
     let wthr = data.weather[0].main.toLowerCase();
     if(wthr===`clouds`){
         
@@ -86,10 +137,10 @@ function animations(data){
 
     }
     if(wthr===`tornado`||wthr===`squal`){
-        
+
     }
 
-}
+}*/
 
 function daysletter(){
 
