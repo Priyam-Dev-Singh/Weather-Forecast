@@ -161,22 +161,30 @@ function animations(data){
     let wicon = document.getElementById("wthrlottie");
     let wthr = data.weather[0].main.toLowerCase();
     let hr = new Date().getHours();
-   
+
+    if(6<=hr<18) {
+        bgimg.style.backgroundImage=`url("https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg")`;
+    }
     if( 0<=hr<6 || 18<=hr<0) {
-        bgimg.style.backgroundImage=`url("https://img1.wallspic.com/previews/7/4/9/3947/3947-night_sky-blue-outer_space-star-cloud-x750.jpg")`;
+        bgimg.style.backgroundImage=`url("https://i.pinimg.com/1200x/0c/92/9c/0c929cee580e5967664f57073d461921.jpg")`;
         main.style.color=`white`;
     }
     if(wthr===`clear`){
-       if(6<=hr<18) wicon.setAttribute("src", "https://lottie.host/b97c57e4-18a1-4eb5-893c-bed5843afb46/5VF7DX1iB1.json" );
-       if( 0<=hr<6 || 18<=hr<0) wicon.setAttribute("src", "https://lottie.host/4fbf083e-44b4-40f9-981e-11134754ff39/czUZas4g49.json" );
+       if(6<=hr<18) {
+        wicon.setAttribute("src", "https://lottie.host/b97c57e4-18a1-4eb5-893c-bed5843afb46/5VF7DX1iB1.json" );
+    }
+       if( 0<=hr<6 || 18<=hr<0) {
+        wicon.setAttribute("src", "https://lottie.host/4fbf083e-44b4-40f9-981e-11134754ff39/czUZas4g49.json" )
+       };
     }
     if(wthr===`clouds`){
         if(6<=hr<18) {
-            wicon.setAttribute("src", "https://lottie.host/93ca4ab7-75e0-4f1f-a8e6-6c588fd95af6/uowBx1ugSp.json" );
-            
+        wicon.setAttribute("src", "https://lottie.host/93ca4ab7-75e0-4f1f-a8e6-6c588fd95af6/uowBx1ugSp.json" );
+        bgimg.style.backgroundImage=`url("https://i.pinimg.com/1200x/1c/45/7b/1c457bb9ac6446abc31de99b0184c0d3.jpg")`;
         }
-       if( 0<=hr<6 || 18<=hr<0) {wicon.setAttribute("src", "https://lottie.host/3538921c-1671-437e-acea-250ccaafdf13/XVU4Vhc8rw.json" );
-
+       if( 0<=hr<6 || 18<=hr<0) {
+        wicon.setAttribute("src", "https://lottie.host/3538921c-1671-437e-acea-250ccaafdf13/XVU4Vhc8rw.json" );
+        bgimg.style.backgroundImage=`url("https://i.pinimg.com/736x/51/2e/d8/512ed8744388afbc6026314bf9758712.jpg")`;
        }
     } 
     if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
@@ -185,6 +193,7 @@ function animations(data){
        
     }
     if(wthr===`rain`|| wthr===`drizzle`){
+       bgimg.style.backgroundImage=`url("https://i.pinimg.com/736x/f3/64/ba/f364bade66f89cfde5537289a1494527.jpg")`;
        if(6<=hr<18) wicon.setAttribute("src", "https://lottie.host/1fd92944-4519-4d93-9bb5-52c6fd60243c/76I9Vcd90H.json" );
        if( 0<=hr<6 || 18<=hr<0) wicon.setAttribute("src", "https://lottie.host/aa7ec0f0-b07e-4d31-8b85-65b4d33d1df2/xyn5PGqhlB.json" );
     }
@@ -192,6 +201,7 @@ function animations(data){
         wicon.setAttribute("src", "https://lottie.host/1830f8e2-b64a-4b77-90d8-1041ed79d912/RoMInbpUjt.json" );
     }
     if(wthr===`thunderstorm`||wthr===`squal`){
+    bgimg.style.backgroundImage=`url("https://i.pinimg.com/1200x/08/51/47/08514789d432925c1c75ba58572307f7.jpg")`;
         wicon.setAttribute("src", "https://lottie.host/9cd0fe38-8f2a-4465-bf35-bd08a390e271/KXTVIU0ZAy.json" );
     }
 
@@ -224,6 +234,5 @@ setInterval(Time,1000);
 
 
 
+//https://img1.wallspic.com/previews/7/4/9/3947/3947-night_sky-blue-outer_space-star-cloud-x750.jpg
 
-
-//https://www.hdwallpapers.in/download/beautiful_starry_sky_during_nighttime_4k_hd_nature-3840x2160.jpg
