@@ -4,8 +4,8 @@
     box-sizing: border-box;
 }
 html,body{
-    height: 100%;
-    width: 100%;
+    height: 100vh;
+    width: 100vw;
 
 }
 #main{
@@ -20,14 +20,11 @@ html,body{
     top: 0;
     left: 0;
     position: fixed;
-   background-color: rgb(184, 228, 228);
     z-index: -1;
-}
-#bg img{
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
-    
+    background-image: url("https://images.pexels.com/photos/912110/pexels-photo-912110.jpeg");
+    background-size: cover;
+    background-position: center;
+   
 }
 #header{
     height: 20%;
@@ -126,7 +123,7 @@ html,body{
     width: 150px;
     margin-left: 150px;
     border-radius: 10px;
-    backdrop-filter: blur(8px);
+    backdrop-filter: blur(9px);
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.562);
      display:flex;
     justify-content: center;
@@ -155,8 +152,8 @@ html,body{
     width: 58%;
     margin-left: 130px;
     border-radius: 30px;
-    backdrop-filter: blur(8px);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.66);
+    backdrop-filter: blur(9px);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.562);
     overflow: hidden;
 }
 #weather:hover{
