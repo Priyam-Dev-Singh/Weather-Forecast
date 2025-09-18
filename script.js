@@ -18,6 +18,7 @@ let city = document.getElementById("city");
 
 
 
+
 navigator.geolocation.getCurrentPosition(success,error);
 function success(position){
     let lat = position.coords.latitude;
@@ -32,6 +33,7 @@ function success(position){
     fetch(url)
     .then(Response=>Response.json())
     .then(data=>{
+        console.log(data);
         weatherupdate(data);
        //animations(data);
     })
@@ -155,12 +157,13 @@ function changetable(data){
 
 }
 
-/*function animations(data){
+function animations(data){
+    let wicon = document.querySelector("#wthrlottie");
     let wthr = data.weather[0].main.toLowerCase();
     if(wthr===`clouds`){
-        
-    }
-    if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
+        wicon.setAttribute("src", "https://assets10.lottiefiles.com/packages/lf20_njvcpmdp.json" );
+    } }
+    /*if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
         
     }
     if(wthr===`rain`|| wthr===`drizzle`){
@@ -172,7 +175,7 @@ function changetable(data){
     if(wthr===`snow`){
 
     }
-    if(wthr===`tornado`||wthr===`squal`){
+    if(wthr===`thunderstorm`||wthr===`squal`){
 
     }
 
