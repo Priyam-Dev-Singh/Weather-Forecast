@@ -156,7 +156,7 @@ html,body{
     margin-left: 130px;
     border-radius: 30px;
     backdrop-filter: blur(8px);
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.56);
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.66);
     overflow: hidden;
 }
 #weather:hover{
@@ -178,6 +178,9 @@ html,body{
 #wicon{
     height: 80%;
     width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: last baseline
     
 }
 #wtext{

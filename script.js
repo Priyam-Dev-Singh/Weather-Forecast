@@ -33,9 +33,9 @@ function success(position){
     fetch(url)
     .then(Response=>Response.json())
     .then(data=>{
-        console.log(data);
+        //console.log(data);
         weatherupdate(data);
-       //animations(data);
+        animations(data);
     })
 }    
 fetchwthr();
@@ -90,7 +90,7 @@ function weatherupdate(data){
 }
 
 function changetable(data){
-        console.log(data);
+        //console.log(data);
         let daycells = document.querySelectorAll("#wthrdays table .date");
         let wthrcells = document.querySelectorAll("#wthrdays table .wthrdesc");
         let ticons = document.querySelectorAll("#wthrdays table .ticons img");
@@ -158,28 +158,33 @@ function changetable(data){
 }
 
 function animations(data){
-    let wicon = document.querySelector("#wthrlottie");
+    let wicon = document.getElementById("wthrlottie");
     let wthr = data.weather[0].main.toLowerCase();
+    let hr = new Date().getHours();
     if(wthr===`clouds`){
-        wicon.setAttribute("src", "https://assets10.lottiefiles.com/packages/lf20_njvcpmdp.json" );
-    } }
-    /*if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
-        
+        if(6<=hr<18) wicon.setAttribute("src", "https://lottie.host/93ca4ab7-75e0-4f1f-a8e6-6c588fd95af6/uowBx1ugSp.json" );
+       if( 0<=hr<6 || 18<=hr<0) wicon.setAttribute("src", "https://lottie.host/3538921c-1671-437e-acea-250ccaafdf13/XVU4Vhc8rw.json" );
+    } 
+    if(wthr===`haze`||wthr===`mist`||wthr===`smoke`||wthr===`fog`||wthr===`dust`){
+        wicon.setAttribute("src", "https://lottie.host/4d91f263-14a3-453b-8ad1-6480b4def417/Lx15oLR8Um.json" );
+        wicon.style.transform=`translateY(7px)`;
     }
     if(wthr===`rain`|| wthr===`drizzle`){
-        
+       if(6<=hr<18) wicon.setAttribute("src", "https://lottie.host/1fd92944-4519-4d93-9bb5-52c6fd60243c/76I9Vcd90H.json" );
+       if( 0<=hr<6 || 18<=hr<0) wicon.setAttribute("src", "https://lottie.host/aa7ec0f0-b07e-4d31-8b85-65b4d33d1df2/xyn5PGqhlB.json" );
     }
     if(wthr===`clear`){
-        
+       if(6<=hr<18) wicon.setAttribute("src", "https://lottie.host/b97c57e4-18a1-4eb5-893c-bed5843afb46/5VF7DX1iB1.json" );
+       if( 0<=hr<6 || 18<=hr<0) wicon.setAttribute("src", "https://lottie.host/4fbf083e-44b4-40f9-981e-11134754ff39/czUZas4g49.json" );
     }
     if(wthr===`snow`){
-
+        wicon.setAttribute("src", "https://lottie.host/1830f8e2-b64a-4b77-90d8-1041ed79d912/RoMInbpUjt.json" );
     }
     if(wthr===`thunderstorm`||wthr===`squal`){
-
+        wicon.setAttribute("src", "https://lottie.host/9cd0fe38-8f2a-4465-bf35-bd08a390e271/KXTVIU0ZAy.json" );
     }
 
-}*/
+}
 
 function daysletter(){
 
@@ -211,3 +216,4 @@ setInterval(Time,1000);
 
 
 //<img src="https://i.pinimg.com/736x/b4/0e/fd/b40efdcf5f50db7c65b4927d084822bb.jpg" alt="">
+//https://lottie.host/82e0ea2b-77fb-4aad-b2f0-49aa36a40233/ioi9fwnJVR.lottie
