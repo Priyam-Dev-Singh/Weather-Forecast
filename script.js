@@ -25,7 +25,7 @@ function fetchwthrbycity(cityName){
     fetch(url)
     .then(Response=>Response.json())
     .then(data=>{
-        //console.log(data);
+        console.log(data);
         if(data.cod !== 200){
             city.innerHTML = `❌ Invalid city!`;
             return;
@@ -35,7 +35,6 @@ function fetchwthrbycity(cityName){
         animations(data);
         let latt = data.coord.lat;
         let long = data.coord.lon;
-        //console.log(latt+" "+long);
         srchfetchcity(latt,long);
     })
     .catch(err=>console.log("error fetching weather: ",err))
@@ -43,7 +42,7 @@ function fetchwthrbycity(cityName){
     fetch(url2)
     .then(Response=>Response.json())
     .then(data=>{
-        //console.log(data);
+        console.log(data);
         changetable(data);
         
     })
@@ -64,7 +63,7 @@ function success(position){
     fetch(url)
     .then(Response=>Response.json())
     .then(data=>{
-        console.log(data);
+        //console.log(data);
         animations(data);
         weatherupdate(data); 
     })
@@ -131,7 +130,6 @@ function weatherupdate(data){
 
 }
 
-
 function changetable(data){
         //console.log(data);
         let daycells = document.querySelectorAll("#wthrdays table .date");
@@ -146,6 +144,10 @@ function changetable(data){
         let tritime = document.querySelectorAll(".tritime");
         let tritemp = document.querySelectorAll(".tritemp");
         let trihrsimg = document.querySelectorAll(".trihrs img");
+        let tpop = document.querySelectorAll("#wthrdays table .tpop");
+        let todaypop = document.getElementById("todaypop");
+
+            todaypop.textContent = `${(data.list[0].pop)*100}%`;
 
             let min= Infinity;
             let max = -Infinity;
@@ -187,6 +189,8 @@ function changetable(data){
         trihrsimg[i].setAttribute("src",`https://openweathermap.org/img/wn/${iconcode}@2x.png`)
        
         tritime[i].textContent = `${hrs}:${minutes}`
+
+
     }
 
         for( let i=0 ; i < 4 ; i++){
@@ -210,6 +214,13 @@ function changetable(data){
             maxmin(max,min,j,i);
            
             maxmin(max,min,0,0);
+
+            let sum = 0;
+            for(let i=j;i<=j+7;i++){
+            let pofp = data.list[i].pop; 
+                sum+=pofp;
+            }
+            tpop[i].textContent = `💧${Math.round(sum/8)}%`;
         }
 }
 
@@ -224,6 +235,7 @@ function animations(data){
     if(hr>=18||hr<6) {
         bgimg.style.backgroundImage=`url("https://i.pinimg.com/1200x/0c/92/9c/0c929cee580e5967664f57073d461921.jpg")`;
         main.style.color=`white`;
+        input.style.color = `white`;
     }
     if(wthr===`clear`){
        if(hr>=6||hr<18) {
@@ -252,9 +264,11 @@ function animations(data){
        }
     }
     if(wthr===`rain`|| wthr===`drizzle`){
-       bgimg.style.backgroundImage=`url("https://i.pinimg.com/736x/f3/64/ba/f364bade66f89cfde5537289a1494527.jpg")`;
+       
        if(hr>=6||hr<18) wicon.setAttribute("src", "https://lottie.host/1fd92944-4519-4d93-9bb5-52c6fd60243c/76I9Vcd90H.json" );
+       bgimg.style.backgroundImage=`url("https://i.pinimg.com/736x/f3/64/ba/f364bade66f89cfde5537289a1494527.jpg")`;
        if(hr>=18||hr<6) wicon.setAttribute("src", "https://lottie.host/aa7ec0f0-b07e-4d31-8b85-65b4d33d1df2/xyn5PGqhlB.json" );
+       bgimg.style.backgroundImage=`url("https://i.pinimg.com/1200x/0e/0b/cb/0e0bcb5c16af79a4e7845316d9e356b1.jpg")`;
     }
     if(wthr===`snow`){
         wicon.setAttribute("src", "https://lottie.host/1830f8e2-b64a-4b77-90d8-1041ed79d912/RoMInbpUjt.json" );
@@ -293,11 +307,9 @@ function srchfetchcity(lat,lon){
     fetch(`https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lon}`)
     .then(res=>res.json())
     .then(data=>{
-       // console.log(data);
-        city.innerHTML=`${data.address.state_district||data.address.city_district}<br>${data.address.state||data.address.city}, ${data.address.country_code.toUpperCase()}`;
+       console.log(data);
+        city.innerHTML=`${data.address.state_district||data.address.city_district||data.address.city}<br>${data.address.state||data.address.city}, ${data.address.country_code.toUpperCase()}`;
     })
 
     .catch(err=>console.log("error fetching weather: ",err))
 }
-
-
