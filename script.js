@@ -308,7 +308,7 @@ function srchfetchcity(lat,lon){
     .then(res=>res.json())
     .then(data=>{
        console.log(data);
-        city.innerHTML=`${data.address.state_district||data.address.city_district||data.address.city}<br>${data.address.state||data.address.city}, ${data.address.country_code.toUpperCase()}`;
+        city.innerHTML=`${data.address.state_district||data.address.city_district||data.address.city||data.address.county}<br>${data.address.state||data.address.city}, ${data.address.country_code.toUpperCase()}`;
     })
 
     .catch(err=>console.log("error fetching weather: ",err))
