@@ -6,3 +6,5 @@ Check it out live: https://priyam-dev-singh.github.io/Weather-Forecast/
 
 Built for fun and practice, and hosted for free on GitHub Pages 🌐.
 //doing quick test to learn branch conflicts
+//main branch creating conflict
+
